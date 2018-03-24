@@ -99,6 +99,9 @@ grbl.hex: $(BUILDDIR)/main.elf
 disasm:	main.elf
 	avr-objdump -d $(BUILDDIR)/main.elf
 
+flash_arduino: all
+	avrdude -v -patmega328p -carduino -P/dev/ttyUSB0 -b115200 -D -Uflash:w:grbl.hex:i
+
 cpp:
 	$(COMPILE) -E $(SOURCEDIR)/main.c
 
